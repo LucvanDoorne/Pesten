@@ -1,93 +1,4 @@
 
-var theme = 'wit'
-var cards
-class Game extends Phaser.Scene {
-    constructor() {
-        super({key:"Game"})
-    }
-
-
-preload() {
-    this.load.image('background', 'assets/Background.jpg')
-    this.load.image('H2', 'assets/cards/wit/witharten2.png')
-    this.load.image('H3', 'assets/cards/wit/witharten3.png')
-    this.load.image('H4', 'assets/cards/wit/witharten4.png')
-    this.load.image('H5', 'assets/cards/wit/witharten5.png')
-    this.load.image('H6', 'assets/cards/wit/witharten6.png')
-    this.load.image('H7', 'assets/cards/wit/witharten7.png')
-    this.load.image('H8', 'assets/cards/wit/witharten8.png')
-    this.load.image('H9', 'assets/cards/wit/witharten9.png')
-    this.load.image('H1', 'assets/cards/wit/witharten10.png')
-    this.load.image('HA', 'assets/cards/wit/withartenA.png')
-    this.load.image('HB', 'assets/cards/wit/withartenJ.png')
-    this.load.image('HH', 'assets/cards/wit/withartenK.png')
-    this.load.image('HV', 'assets/cards/wit/withartenQ.png')
-    this.load.image('K2', 'assets/cards/wit/witklaver2.png')
-    this.load.image('K3', 'assets/cards/wit/witklaver3.png')
-    this.load.image('K4', 'assets/cards/wit/witklaver4.png')
-    this.load.image('K5', 'assets/cards/wit/witklaver5.png')
-    this.load.image('K6', 'assets/cards/wit/witklaver6.png')
-    this.load.image('K7', 'assets/cards/wit/witklaver7.png')
-    this.load.image('K8', 'assets/cards/wit/witklaver8.png')
-    this.load.image('K9', 'assets/cards/wit/witklaver9.png')
-    this.load.image('K1', 'assets/cards/wit/witklaver10.png')
-    this.load.image('KA', 'assets/cards/wit/witklaverA.png')
-    this.load.image('KB', 'assets/cards/wit/witklaverJ.png')
-    this.load.image('KH', 'assets/cards/wit/witklaverK.png')
-    this.load.image('KV', 'assets/cards/wit/witklaverQ.png')
-    this.load.image('R2', 'assets/cards/wit/witruiten2.png')
-    this.load.image('R3', 'assets/cards/wit/witruiten3.png')
-    this.load.image('R4', 'assets/cards/wit/witruiten4.png')
-    this.load.image('R5', 'assets/cards/wit/witruiten5.png')
-    this.load.image('R6', 'assets/cards/wit/witruiten6.png')
-    this.load.image('R7', 'assets/cards/wit/witruiten7.png')
-    this.load.image('R8', 'assets/cards/wit/witruiten8.png')
-    this.load.image('R9', 'assets/cards/wit/witruiten9.png')
-    this.load.image('R1', 'assets/cards/wit/witruiten10.png')
-    this.load.image('RA', 'assets/cards/wit/witruitenA.png')
-    this.load.image('RB', 'assets/cards/wit/witruitenJ.png')
-    this.load.image('RH', 'assets/cards/wit/witruitenK.png')
-    this.load.image('RV', 'assets/cards/wit/witruitenQ.png')
-    this.load.image('S2', 'assets/cards/wit/witschoppen2.png')
-    this.load.image('S3', 'assets/cards/wit/witschoppen3.png')
-    this.load.image('S4', 'assets/cards/wit/witschoppen4.png')
-    this.load.image('S5', 'assets/cards/wit/witschoppen5.png')
-    this.load.image('S6', 'assets/cards/wit/witschoppen6.png')
-    this.load.image('S7', 'assets/cards/wit/witschoppen7.png')
-    this.load.image('S8', 'assets/cards/wit/witschoppen8.png')
-    this.load.image('S9', 'assets/cards/wit/witschoppen9.png')
-    this.load.image('S1', 'assets/cards/wit/witschoppen10.png')
-    this.load.image('SA', 'assets/cards/wit/witschoppenA.png')
-    this.load.image('SB', 'assets/cards/wit/witschoppenJ.png')
-    this.load.image('SH', 'assets/cards/wit/witschoppenK.png')
-    this.load.image('SV', 'assets/cards/wit/witschoppenQ.png')
-    this.load.image('JJ', 'assets/cards/wit/witjoker.png')
-
-
-
-    
-}
-
-create (){
-    cards = this.add.group()
-    var pointer = this.input.activePointer
-    //achtergrond
-    var background = this.add.image(640,360,'background')
-    background.scale = 0.34
-    //var witharten2 = cards.create(640, 360, 'witharten2')
-    var gespeeldeKaartImage = this.add.image(640, 360, gespeeldeKaart)
-    gespeeldeKaartImage.scale = 0.1
-
-    
-}
-
-update(){
-   
-}
-
-}
-
-
 // variabele die nodig zijn
 var aantalSpelers = 4
 let beurt = 1
@@ -133,7 +44,7 @@ var decks = []
 for (var i = 0; i <= aantalSpelers; i++){
     decks[i] = [kaarten.splice(0,7)]
 }
-console.log(decks[0])
+
 /*
 if (aantalSpelers >= 2) {
     var deck1 = kaarten.splice(0, 7)
@@ -146,17 +57,15 @@ if (aantalSpelers == 4) {
     var deck4 = kaarten.splice(0, 7)
 }
 */
-var pakstapel = kaarten
+
 // dit is de beginnende kaart (dit mag geen pestkaart zijn)
 const nummerKaarten = kaarten[0].charAt(1)
-/*while (nummerKaarten == "A" || nummerKaarten == "2" || nummerKaarten == "7" || nummerKaarten == "8" || nummerKaarten == "J" || nummerKaarten == "B"){
+while (nummerKaarten == "A" || nummerKaarten == "2" || nummerKaarten == "7" || nummerKaarten == "8" || nummerKaarten == "J" || nummerKaarten == "B"){
     pakstapel = pakstapel.push(kaarten.splice(0,1))
     nummerKaarten = kaarten[0].charAt(1)
-}*/
-//gespeeldeKaart = 'H2'
+}
 gespeeldeKaart = kaarten.splice(0,1)
-console.log(gespeeldeKaart)
-/*
+
 // zet overige kaarten in 'pakstapel'
 var pakstapel = kaarten
 
@@ -554,7 +463,7 @@ function winnaar(){
         return 'Gefeliciteerd met de ' + positieWinnaar + 'e plek'
     } 
 }
-
+console.log(decks[0])
 //console.log(deck1.length)
 console.log('geselecteerdeKaart: ' + geselecteerdeKaart)
 console.log('Beurt: ' + beurt)
@@ -565,4 +474,3 @@ console.log('geselecteerdeKaart: ' + geselecteerdeKaart)
 console.log('gespeelde kaart = ' + gespeeldeKaart)
 //console.log(deck2)
 console.log(kaarten)
-*/
