@@ -7,64 +7,68 @@ class Game extends Phaser.Scene {
 
 
 preload() {
-    this.load.image('background', 'assets2/Background.jpg')
-    this.load.image('H2', 'assets2/cards/wit/witharten2.png')
-    this.load.image('H3', 'assets2/cards/wit/witharten3.png')
-    this.load.image('H4', 'assets2/cards/wit/witharten4.png')
-    this.load.image('H5', 'assets2/cards/wit/witharten5.png')
-    this.load.image('H6', 'assets2/cards/wit/witharten6.png')
-    this.load.image('H7', 'assets2/cards/wit/witharten7.png')
-    this.load.image('H8', 'assets2/cards/wit/witharten8.png')
-    this.load.image('H9', 'assets2/cards/wit/witharten9.png')
-    this.load.image('H1', 'assets2/cards/wit/witharten10.png')
-    this.load.image('HA', 'assets2/cards/wit/withartenA.png')
-    this.load.image('HB', 'assets2/cards/wit/withartenJ.png')
-    this.load.image('HH', 'assets2/cards/wit/withartenK.png')
-    this.load.image('HV', 'assets2/cards/wit/withartenQ.png')
-    this.load.image('K2', 'assets2/cards/wit/witklaver2.png')
-    this.load.image('K3', 'assets2/cards/wit/witklaver3.png')
-    this.load.image('K4', 'assets2/cards/wit/witklaver4.png')
-    this.load.image('K5', 'assets2/cards/wit/witklaver5.png')
-    this.load.image('K6', 'assets2/cards/wit/witklaver6.png')
-    this.load.image('K7', 'assets2/cards/wit/witklaver7.png')
-    this.load.image('K8', 'assets2/cards/wit/witklaver8.png')
-    this.load.image('K9', 'assets2/cards/wit/witklaver9.png')
-    this.load.image('K1', 'assets2/cards/wit/witklaver10.png')
-    this.load.image('KA', 'assets2/cards/wit/witklaverA.png')
-    this.load.image('KB', 'assets2/cards/wit/witklaverJ.png')
-    this.load.image('KH', 'assets2/cards/wit/witklaverK.png')
-    this.load.image('KV', 'assets2/cards/wit/witklaverQ.png')
-    this.load.image('R2', 'assets2/cards/wit/witruiten2.png')
-    this.load.image('R3', 'assets2/cards/wit/witruiten3.png')
-    this.load.image('R4', 'assets2/cards/wit/witruiten4.png')
-    this.load.image('R5', 'assets2/cards/wit/witruiten5.png')
-    this.load.image('R6', 'assets2/cards/wit/witruiten6.png')
-    this.load.image('R7', 'assets2/cards/wit/witruiten7.png')
-    this.load.image('R8', 'assets2/cards/wit/witruiten8.png')
-    this.load.image('R9', 'assets2/cards/wit/witruiten9.png')
-    this.load.image('R1', 'assets2/cards/wit/witruiten10.png')
-    this.load.image('RA', 'assets2/cards/wit/witruitenA.png')
-    this.load.image('RB', 'assets2/cards/wit/witruitenJ.png')
-    this.load.image('RH', 'assets2/cards/wit/witruitenK.png')
-    this.load.image('RV', 'assets2/cards/wit/witruitenQ.png')
-    this.load.image('S2', 'assets2/cards/wit/witschoppen2.png')
-    this.load.image('S3', 'assets2/cards/wit/witschoppen3.png')
-    this.load.image('S4', 'assets2/cards/wit/witschoppen4.png')
-    this.load.image('S5', 'assets2/cards/wit/witschoppen5.png')
-    this.load.image('S6', 'assets2/cards/wit/witschoppen6.png')
-    this.load.image('S7', 'assets2/cards/wit/witschoppen7.png')
-    this.load.image('S8', 'assets2/cards/wit/witschoppen8.png')
-    this.load.image('S9', 'assets2/cards/wit/witschoppen9.png')
-    this.load.image('S1', 'assets2/cards/wit/witschoppen10.png')
-    this.load.image('SA', 'assets2/cards/wit/witschoppenA.png')
-    this.load.image('SB', 'assets2/cards/wit/witschoppenJ.png')
-    this.load.image('SH', 'assets2/cards/wit/witschoppenK.png')
-    this.load.image('SV', 'assets2/cards/wit/witschoppenQ.png')
-    this.load.image('JJ', 'assets2/cards/wit/witjoker.png')
-    this.load.image('Arrow', 'assets2/arrow.png')
+    this.load.image('background', 'assets3/Background.jpg')
+    this.load.image('H2', 'assets3/cards/wit/witharten2.png')
+    this.load.image('H3', 'assets3/cards/wit/witharten3.png')
+    this.load.image('H4', 'assets3/cards/wit/witharten4.png')
+    this.load.image('H5', 'assets3/cards/wit/witharten5.png')
+    this.load.image('H6', 'assets3/cards/wit/witharten6.png')
+    this.load.image('H7', 'assets3/cards/wit/witharten7.png')
+    this.load.image('H8', 'assets3/cards/wit/witharten8.png')
+    this.load.image('H9', 'assets3/cards/wit/witharten9.png')
+    this.load.image('H1', 'assets3/cards/wit/witharten10.png')
+    this.load.image('HA', 'assets3/cards/wit/withartenA.png')
+    this.load.image('HB', 'assets3/cards/wit/withartenJ.png')
+    this.load.image('HH', 'assets3/cards/wit/withartenK.png')
+    this.load.image('HV', 'assets3/cards/wit/withartenQ.png')
+    this.load.image('K2', 'assets3/cards/wit/witklaver2.png')
+    this.load.image('K3', 'assets3/cards/wit/witklaver3.png')
+    this.load.image('K4', 'assets3/cards/wit/witklaver4.png')
+    this.load.image('K5', 'assets3/cards/wit/witklaver5.png')
+    this.load.image('K6', 'assets3/cards/wit/witklaver6.png')
+    this.load.image('K7', 'assets3/cards/wit/witklaver7.png')
+    this.load.image('K8', 'assets3/cards/wit/witklaver8.png')
+    this.load.image('K9', 'assets3/cards/wit/witklaver9.png')
+    this.load.image('K1', 'assets3/cards/wit/witklaver10.png')
+    this.load.image('KA', 'assets3/cards/wit/witklaverA.png')
+    this.load.image('KB', 'assets3/cards/wit/witklaverJ.png')
+    this.load.image('KH', 'assets3/cards/wit/witklaverK.png')
+    this.load.image('KV', 'assets3/cards/wit/witklaverQ.png')
+    this.load.image('R2', 'assets3/cards/wit/witruiten2.png')
+    this.load.image('R3', 'assets3/cards/wit/witruiten3.png')
+    this.load.image('R4', 'assets3/cards/wit/witruiten4.png')
+    this.load.image('R5', 'assets3/cards/wit/witruiten5.png')
+    this.load.image('R6', 'assets3/cards/wit/witruiten6.png')
+    this.load.image('R7', 'assets3/cards/wit/witruiten7.png')
+    this.load.image('R8', 'assets3/cards/wit/witruiten8.png')
+    this.load.image('R9', 'assets3/cards/wit/witruiten9.png')
+    this.load.image('R1', 'assets3/cards/wit/witruiten10.png')
+    this.load.image('RA', 'assets3/cards/wit/witruitenA.png')
+    this.load.image('RB', 'assets3/cards/wit/witruitenJ.png')
+    this.load.image('RH', 'assets3/cards/wit/witruitenK.png')
+    this.load.image('RV', 'assets3/cards/wit/witruitenQ.png')
+    this.load.image('S2', 'assets3/cards/wit/witschoppen2.png')
+    this.load.image('S3', 'assets3/cards/wit/witschoppen3.png')
+    this.load.image('S4', 'assets3/cards/wit/witschoppen4.png')
+    this.load.image('S5', 'assets3/cards/wit/witschoppen5.png')
+    this.load.image('S6', 'assets3/cards/wit/witschoppen6.png')
+    this.load.image('S7', 'assets3/cards/wit/witschoppen7.png')
+    this.load.image('S8', 'assets3/cards/wit/witschoppen8.png')
+    this.load.image('S9', 'assets3/cards/wit/witschoppen9.png')
+    this.load.image('S1', 'assets3/cards/wit/witschoppen10.png')
+    this.load.image('SA', 'assets3/cards/wit/witschoppenA.png')
+    this.load.image('SB', 'assets3/cards/wit/witschoppenJ.png')
+    this.load.image('SH', 'assets3/cards/wit/witschoppenK.png')
+    this.load.image('SV', 'assets3/cards/wit/witschoppenQ.png')
+    this.load.image('JJ', 'assets3/cards/wit/witjoker.png')
+    this.load.image('Arrow', 'assets3/arrow.png')
+    this.load.image('Table', 'assets3/table.png')
+    this.load.image('gray-chair', 'assets3/gray-chair.png')
+    this.load.image('brown-chair', 'assets3/brown-chair.png')
+    this.load.image('backcard', 'assets3/backcard.jpg')
+    this.load.spritesheet('button', 'assets3/button.png', {frameWidth: 860, frameHeight: 378})
+    //this.load.image('button-pushed', 'asstets3/button-pushed.png')
 
-
-    
 }
 
 create (){
@@ -74,26 +78,93 @@ create (){
     //achtergrond
     var background = this.add.image(640,360,'background')
     background.scale = 0.34
-    //var witharten2 = cards.create(640, 360, 'witharten2')
 
-    //maakt de gespeelde kaart
-    var gespeeldeKaartImage = this.add.image(640, 360, gespeeldeKaart)
+    //stoelen
+    switch (aantalSpelers) {
+        case 2: 
+            var stoel1 = this.add.image(170, 38, 'gray-chair')
+            stoel1.scale = 0.17
+            var stoel2 = this.add.image(170, 302, 'gray-chair')
+            stoel2.scale = 0.17
+            stoel2.rotation = 3.13
+        case 3:
+            var stoel1 = this.add.image(170, 38, 'gray-chair')
+            stoel1.scale = 0.17
+            var stoel2 = this.add.image(60, 250, 'gray-chair')
+            stoel2.scale = 0.17
+            stoel2.rotation = 4.1
+            var stoel3 = this.add.image(277, 250, 'gray-chair')
+            stoel3.scale = 0.17
+            stoel3.rotation = 2.2
+        case 4:
+            var stoel1 = this.add.image(170, 38, 'gray-chair')
+            stoel1.scale = 0.17
+            var stoel2 = this.add.image(170, 302, 'gray-chair')
+            stoel2.scale = 0.17
+            stoel2.rotation = 3.13
+            var stoel3 = this.add.image(38, 170, 'gray-chair')
+            stoel3.scale = 0.17
+            stoel3.rotation = 4.7
+            var stoel4 = this.add.image(302, 170, 'gray-chair')
+            stoel4.scale = 0.17
+            stoel4.rotation = 1.57
+    }
+    //tafel
+    var tafel = this.add.image(170, 170, 'Table')
+    tafel.scale = 0.5
+
+    //maakt de gespeelde kaart en de pakstapel afbeelding
+    var gespeeldeKaartImage = this.add.image(540, 360, gespeeldeKaart)
     gespeeldeKaartImage.scale = 0.2
     cards.add(gespeeldeKaartImage)
-    
-    var arrow = this.add.image(640, 360)
+    var backcard = this.add.sprite(730, 360, 'backcard')
+    backcard.scale = 0.2
+    backcard.setInteractive()
+        backcard.on('pointerdown', function(event) {
+            if (pointer.leftButtonDown()){
+            decks[0].push(pakstapel.splice(0,1))
+            }
+        })
 
-    //decks = this.add.group()
+    //laad het deck in
+    var decklengte = decks[0].length 
+    var deck1 = []
     for (var i = 0; i <= decks[0].length - 1; i++) {
-        var deck1 = this.add.image(300 + i*40, 600, decks[0][i])
-        deck1.scale = 0.2
+        deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]).setInteractive())
+        deck1[i].scale = 0.2
     }
-    //var kaart1 = this.add.image(300, 600, decks[0][0])
-    //kaart1.scale = 0.1    
+    
+    deck1[i].on('pointerover', function(event) {
+        deck1[i].y = 560
+        
+    })
+    deck1[i].on('pointerout', function(event) {
+        deck1[i].y = 600
+    })
+    
+    
+    
+    //buttons
+    var button = this.add.sprite(1100, 600, 'button')
+    button.scale = 0.3
+    button.setInteractive()
+    button.on('pointerover', function(event) {
+        button.setFrame(1)
+    })
+    button.on('pointerout', function(event) {
+        button.setFrame(0)
+    })
+
 }
 
 update(){
-   
+    var decklengte = decks[0].length
+    var deck1 = []
+    for (var i = 0; i <= decks[0].length - 1; i++) {
+        deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]))
+        deck1[i].scale = 0.2
+        deck1[i].setInteractive()
+    }
 }
 
 }
@@ -135,7 +206,7 @@ var decks = []
 for (var i = 0; i <= aantalSpelers; i++){
     decks[i] = kaarten.splice(0,7)
 }
-console.log(decks[0])
+
 
 
 
