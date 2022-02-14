@@ -1,5 +1,7 @@
 var theme = 'wit'
 var cards
+var deck1 = []
+var backcard
 class Game extends Phaser.Scene {
     constructor() {
         super({key:"Game"})
@@ -114,10 +116,10 @@ create (){
     tafel.scale = 0.5
 
     //maakt de gespeelde kaart en de pakstapel afbeelding
-    var gespeeldeKaartImage = this.add.image(540, 360, gespeeldeKaart)
+    var gespeeldeKaartImage = this.add.image(540, 290, gespeeldeKaart)
     gespeeldeKaartImage.scale = 0.2
     cards.add(gespeeldeKaartImage)
-    var backcard = this.add.sprite(730, 360, 'backcard')
+    backcard = this.add.sprite(730, 290, 'backcard')
     backcard.scale = 0.2
     backcard.setInteractive()
         backcard.on('pointerdown', function(event) {
@@ -126,45 +128,70 @@ create (){
             }
         })
 
-    //laad het deck in
+    /*laad het deck in
     var decklengte = decks[0].length 
     var deck1 = []
     for (var i = 0; i <= decks[0].length - 1; i++) {
         deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]).setInteractive())
         deck1[i].scale = 0.2
+    }*/
+    var decklengte = decks[0].length 
+    var deck1 = []
+    for (var i = 0; i <= decks[0].length - 1; i++) {
+        deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]))
+        deck1[i].scale = 0.2
+        deck1[i].setInteractive()
+        deck1[i].depth = 1
     }
-    
-    deck1[i].on('pointerover', function(event) {
-        deck1[i].y = 560
+    deck1[0].on('pointerover', function(event) {
+        deck1[0].y = 560
+        deck1[0].depth = 2
         
     })
-    deck1[i].on('pointerout', function(event) {
-        deck1[i].y = 600
+    deck1[0].on('pointerout', function(event) {
+        deck1[0].y = 600
+        deck1[0].depth = 0
     })
-    
     
     
     //buttons
     var button = this.add.sprite(1100, 600, 'button')
     button.scale = 0.3
     button.setInteractive()
+    button.on('pointerdown', function(event) {
+        if (pointer.leftButtonDown()){
+            button.setFrame(1)  
+        }     
+    })
     button.on('pointerover', function(event) {
-        button.setFrame(1)
+        button.setFrame(0)
     })
     button.on('pointerout', function(event) {
         button.setFrame(0)
     })
+    
 
 }
 
 update(){
+    var pointer = this.input.activePointer
     var decklengte = decks[0].length
-    var deck1 = []
-    for (var i = 0; i <= decks[0].length - 1; i++) {
-        deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]))
-        deck1[i].scale = 0.2
-        deck1[i].setInteractive()
-    }
+    deck1
+    backcard.on('pointerdown', function(event) {
+        if (pointer.leftButtonDown()){
+        decks[0].push(pakstapel.splice(0,1))
+        for (var i = 0; i <= decks[0].length - 1; i++) {
+            deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]))
+            deck1[i].scale = 0.2
+            deck1[i].setInteractive()
+            deck1[i].depth = 1
+        }
+        }})
+
+
+    //for (var i = 0; i <= decks[0].length - 1; i++) {
+        
+    //}
 }
 
 }
