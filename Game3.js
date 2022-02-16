@@ -1,12 +1,11 @@
 var theme = 'wit'
 var cards
-var deck1 = []
+var deck1
 var backcard
 class Game extends Phaser.Scene {
     constructor() {
         super({key:"Game"})
     }
-
 
 preload() {
     this.load.image('background', 'assets3/Background.jpg')
@@ -69,7 +68,7 @@ preload() {
     this.load.image('brown-chair', 'assets3/brown-chair.png')
     this.load.image('backcard', 'assets3/backcard.jpg')
     this.load.spritesheet('button', 'assets3/button.png', {frameWidth: 860, frameHeight: 378})
-    //this.load.image('button-pushed', 'asstets3/button-pushed.png')
+    
 
 }
 
@@ -122,36 +121,40 @@ create (){
     backcard = this.add.sprite(730, 290, 'backcard')
     backcard.scale = 0.2
     backcard.setInteractive()
-        backcard.on('pointerdown', function(event) {
-            if (pointer.leftButtonDown()){
-            decks[0].push(pakstapel.splice(0,1))
-            }
-        })
+    backcard.on('pointerdown', function(event) {
+        if (pointer.leftButtonDown()){
+        decks[0].push(pakstapel.splice(0,1))
+        }
+    })
 
-    /*laad het deck in
+    deck1 = this.add.group()
+    
+    
+    
     var decklengte = decks[0].length 
-    var deck1 = []
-    for (var i = 0; i <= decks[0].length - 1; i++) {
-        deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]).setInteractive())
-        deck1[i].scale = 0.2
-    }*/
-    var decklengte = decks[0].length 
-    var deck1 = []
-    for (var i = 0; i <= decks[0].length - 1; i++) {
-        deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]))
-        deck1[i].scale = 0.2
-        deck1[i].setInteractive()
-        deck1[i].depth = 1
+
+    for (var i = 0; i < decks[0].length; i++) {
+        deck1.create(640 - decklengte*20 + 20 + i*40, 600, decks[0][i])
+        //deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]))
+        deck1.depth = 1
     }
-    deck1[0].on('pointerover', function(event) {
-        deck1[0].y = 560
-        deck1[0].depth = 2
-        
+    //deck1.setInteractive()
+
+    deck1.children.iterate((child) => {
+        child.setScale(0.2, 0.2)
+        child.setInteractive()
+        child.on('pointerover', function(event) {
+            child.y = 550
+            child.depth = 2
+        })
+            
+        child.on('pointerout', function(event) {
+            child.y = 600
+            child.depth = 1
+        })
     })
-    deck1[0].on('pointerout', function(event) {
-        deck1[0].y = 600
-        deck1[0].depth = 0
-    })
+
+    
     
     
     //buttons
@@ -177,23 +180,31 @@ update(){
     var pointer = this.input.activePointer
     var decklengte = decks[0].length
     deck1
-    backcard.on('pointerdown', function(event) {
-        if (pointer.leftButtonDown()){
-        decks[0].push(pakstapel.splice(0,1))
-        for (var i = 0; i <= decks[0].length - 1; i++) {
-            deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]))
-            deck1[i].scale = 0.2
-            deck1[i].setInteractive()
-            deck1[i].depth = 1
-        }
-        }})
-
+    
+        //for (var i = 0; i < decks[0].length; i++) {
+        //    deck1.create(640 - decklengte*20 + 20 + i*40, 600, decks[0][i])
+        //    deck1.depth = 1
+        //}
+        deck1.children.iterate((child) => {
+            child.setScale(0.2, 0.2)
+            child.setInteractive()
+            child.on('pointerover', function(event) {
+                child.y = 550
+                child.depth = 2
+            })
+                
+            child.on('pointerout', function(event) {
+                child.y = 600
+                child.depth = 0
+            })
+        })
 
     //for (var i = 0; i <= decks[0].length - 1; i++) {
         
     //}
-}
 
+
+}
 }
 
 
