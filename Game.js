@@ -8,66 +8,67 @@ class Game extends Phaser.Scene {
     }
 
 preload() {
-    this.load.image('background', 'assets3/Background.jpg')
-    this.load.image('H2', 'assets3/cards/wit/witharten2.png')
-    this.load.image('H3', 'assets3/cards/wit/witharten3.png')
-    this.load.image('H4', 'assets3/cards/wit/witharten4.png')
-    this.load.image('H5', 'assets3/cards/wit/witharten5.png')
-    this.load.image('H6', 'assets3/cards/wit/witharten6.png')
-    this.load.image('H7', 'assets3/cards/wit/witharten7.png')
-    this.load.image('H8', 'assets3/cards/wit/witharten8.png')
-    this.load.image('H9', 'assets3/cards/wit/witharten9.png')
-    this.load.image('H1', 'assets3/cards/wit/witharten10.png')
-    this.load.image('HA', 'assets3/cards/wit/withartenA.png')
-    this.load.image('HB', 'assets3/cards/wit/withartenJ.png')
-    this.load.image('HH', 'assets3/cards/wit/withartenK.png')
-    this.load.image('HV', 'assets3/cards/wit/withartenQ.png')
-    this.load.image('K2', 'assets3/cards/wit/witklaver2.png')
-    this.load.image('K3', 'assets3/cards/wit/witklaver3.png')
-    this.load.image('K4', 'assets3/cards/wit/witklaver4.png')
-    this.load.image('K5', 'assets3/cards/wit/witklaver5.png')
-    this.load.image('K6', 'assets3/cards/wit/witklaver6.png')
-    this.load.image('K7', 'assets3/cards/wit/witklaver7.png')
-    this.load.image('K8', 'assets3/cards/wit/witklaver8.png')
-    this.load.image('K9', 'assets3/cards/wit/witklaver9.png')
-    this.load.image('K1', 'assets3/cards/wit/witklaver10.png')
-    this.load.image('KA', 'assets3/cards/wit/witklaverA.png')
-    this.load.image('KB', 'assets3/cards/wit/witklaverJ.png')
-    this.load.image('KH', 'assets3/cards/wit/witklaverK.png')
-    this.load.image('KV', 'assets3/cards/wit/witklaverQ.png')
-    this.load.image('R2', 'assets3/cards/wit/witruiten2.png')
-    this.load.image('R3', 'assets3/cards/wit/witruiten3.png')
-    this.load.image('R4', 'assets3/cards/wit/witruiten4.png')
-    this.load.image('R5', 'assets3/cards/wit/witruiten5.png')
-    this.load.image('R6', 'assets3/cards/wit/witruiten6.png')
-    this.load.image('R7', 'assets3/cards/wit/witruiten7.png')
-    this.load.image('R8', 'assets3/cards/wit/witruiten8.png')
-    this.load.image('R9', 'assets3/cards/wit/witruiten9.png')
-    this.load.image('R1', 'assets3/cards/wit/witruiten10.png')
-    this.load.image('RA', 'assets3/cards/wit/witruitenA.png')
-    this.load.image('RB', 'assets3/cards/wit/witruitenJ.png')
-    this.load.image('RH', 'assets3/cards/wit/witruitenK.png')
-    this.load.image('RV', 'assets3/cards/wit/witruitenQ.png')
-    this.load.image('S2', 'assets3/cards/wit/witschoppen2.png')
-    this.load.image('S3', 'assets3/cards/wit/witschoppen3.png')
-    this.load.image('S4', 'assets3/cards/wit/witschoppen4.png')
-    this.load.image('S5', 'assets3/cards/wit/witschoppen5.png')
-    this.load.image('S6', 'assets3/cards/wit/witschoppen6.png')
-    this.load.image('S7', 'assets3/cards/wit/witschoppen7.png')
-    this.load.image('S8', 'assets3/cards/wit/witschoppen8.png')
-    this.load.image('S9', 'assets3/cards/wit/witschoppen9.png')
-    this.load.image('S1', 'assets3/cards/wit/witschoppen10.png')
-    this.load.image('SA', 'assets3/cards/wit/witschoppenA.png')
-    this.load.image('SB', 'assets3/cards/wit/witschoppenJ.png')
-    this.load.image('SH', 'assets3/cards/wit/witschoppenK.png')
-    this.load.image('SV', 'assets3/cards/wit/witschoppenQ.png')
-    this.load.image('JJ', 'assets3/cards/wit/witjoker.png')
-    this.load.image('Arrow', 'assets3/arrow.png')
-    this.load.image('Table', 'assets3/table.png')
-    this.load.image('gray-chair', 'assets3/gray-chair.png')
-    this.load.image('brown-chair', 'assets3/brown-chair.png')
-    this.load.image('backcard', 'assets3/backcard.jpg')
-    this.load.spritesheet('button', 'assets3/button.png', {frameWidth: 860, frameHeight: 378})
+    this.load.image('background', 'assets/Background.jpg')
+    this.load.image('H2', 'assets/cards/wit/witharten2.png')
+    this.load.image('H3', 'assets/cards/wit/witharten3.png')
+    this.load.image('H4', 'assets/cards/wit/witharten4.png')
+    this.load.image('H5', 'assets/cards/wit/witharten5.png')
+    this.load.image('H6', 'assets/cards/wit/witharten6.png')
+    this.load.image('H7', 'assets/cards/wit/witharten7.png')
+    this.load.image('H8', 'assets/cards/wit/witharten8.png')
+    this.load.image('H9', 'assets/cards/wit/witharten9.png')
+    this.load.image('H1', 'assets/cards/wit/witharten10.png')
+    this.load.image('HA', 'assets/cards/wit/withartenA.png')
+    this.load.image('HB', 'assets/cards/wit/withartenJ.png')
+    this.load.image('HH', 'assets/cards/wit/withartenK.png')
+    this.load.image('HV', 'assets/cards/wit/withartenQ.png')
+    this.load.image('K2', 'assets/cards/wit/witklaver2.png')
+    this.load.image('K3', 'assets/cards/wit/witklaver3.png')
+    this.load.image('K4', 'assets/cards/wit/witklaver4.png')
+    this.load.image('K5', 'assets/cards/wit/witklaver5.png')
+    this.load.image('K6', 'assets/cards/wit/witklaver6.png')
+    this.load.image('K7', 'assets/cards/wit/witklaver7.png')
+    this.load.image('K8', 'assets/cards/wit/witklaver8.png')
+    this.load.image('K9', 'assets/cards/wit/witklaver9.png')
+    this.load.image('K1', 'assets/cards/wit/witklaver10.png')
+    this.load.image('KA', 'assets/cards/wit/witklaverA.png')
+    this.load.image('KB', 'assets/cards/wit/witklaverJ.png')
+    this.load.image('KH', 'assets/cards/wit/witklaverK.png')
+    this.load.image('KV', 'assets/cards/wit/witklaverQ.png')
+    this.load.image('R2', 'assets/cards/wit/witruiten2.png')
+    this.load.image('R3', 'assets/cards/wit/witruiten3.png')
+    this.load.image('R4', 'assets/cards/wit/witruiten4.png')
+    this.load.image('R5', 'assets/cards/wit/witruiten5.png')
+    this.load.image('R6', 'assets/cards/wit/witruiten6.png')
+    this.load.image('R7', 'assets/cards/wit/witruiten7.png')
+    this.load.image('R8', 'assets/cards/wit/witruiten8.png')
+    this.load.image('R9', 'assets/cards/wit/witruiten9.png')
+    this.load.image('R1', 'assets/cards/wit/witruiten10.png')
+    this.load.image('RA', 'assets/cards/wit/witruitenA.png')
+    this.load.image('RB', 'assets/cards/wit/witruitenJ.png')
+    this.load.image('RH', 'assets/cards/wit/witruitenK.png')
+    this.load.image('RV', 'assets/cards/wit/witruitenQ.png')
+    this.load.image('S2', 'assets/cards/wit/witschoppen2.png')
+    this.load.image('S3', 'assets/cards/wit/witschoppen3.png')
+    this.load.image('S4', 'assets/cards/wit/witschoppen4.png')
+    this.load.image('S5', 'assets/cards/wit/witschoppen5.png')
+    this.load.image('S6', 'assets/cards/wit/witschoppen6.png')
+    this.load.image('S7', 'assets/cards/wit/witschoppen7.png')
+    this.load.image('S8', 'assets/cards/wit/witschoppen8.png')
+    this.load.image('S9', 'assets/cards/wit/witschoppen9.png')
+    this.load.image('S1', 'assets/cards/wit/witschoppen10.png')
+    this.load.image('SA', 'assets/cards/wit/witschoppenA.png')
+    this.load.image('SB', 'assets/cards/wit/witschoppenJ.png')
+    this.load.image('SH', 'assets/cards/wit/witschoppenK.png')
+    this.load.image('SV', 'assets/cards/wit/witschoppenQ.png')
+    this.load.image('JJ', 'assets/cards/wit/witjoker.png')
+    this.load.image('Arrow', 'assets/arrow.png')
+    this.load.image('Table', 'assets/table.png')
+    this.load.image('gray-chair', 'assets/gray-chair.png')
+    this.load.image('brown-chair', 'assets/brown-chair.png')
+    this.load.image('backcard', 'assets/backcard.jpg')
+    this.load.spritesheet('button', 'assets/button.png', {frameWidth: 860, frameHeight: 378})
+    this.load.image('Beurt-richting', 'assets/Arrow2.png')
     
 
 }
@@ -127,30 +128,27 @@ create (){
         }
     })
 
-    deck1 = this.add.group()
-    
-    
-    
-    var decklengte = decks[0].length 
 
+    //maakt de decks aan
+    deck1 = this.add.group()
+    var decklengte = decks[0].length 
     for (var i = 0; i < decks[0].length; i++) {
-        deck1.create(640 - decklengte*20 + 20 + i*40, 600, decks[0][i])
-        //deck1.push(this.add.sprite(640 - decklengte*20 + 20 + i*40, 600, decks[0][i]))
-        deck1.depth = 1
+        deck1.create(640 - decklengte*20 + 20 + i*40, 600, decks[0][i])        
     }
-    //deck1.setInteractive()
+    
 
     deck1.children.iterate((child) => {
         child.setScale(0.2, 0.2)
         child.setInteractive()
+        //child.depth = 1
         child.on('pointerover', function(event) {
             child.y = 550
-            child.depth = 2
+            //child.depth = 2
         })
             
         child.on('pointerout', function(event) {
             child.y = 600
-            child.depth = 1
+            //child.depth = 1
         })
     })
 
@@ -173,6 +171,19 @@ create (){
         button.setFrame(0)
     })
     
+    //beurtrichting
+    var speelrichtingImage = this.add.image(160, 305, 'Beurt-richting')
+    speelrichtingImage.scale = 0.5
+    if (spelrichting == 1){
+        speelrichtingImage.flipX = false
+        speelrichtingImage.rotation = 4.7
+        speelrichtingImage.x = 160
+    }else if (spelrichting == -1) {
+        speelrichtingImage.rotation = 1.57
+        speelrichtingImage.x = 177
+        speelrichtingImage.flipX = true
+    }
+    
 
 }
 
@@ -180,22 +191,24 @@ update(){
     var pointer = this.input.activePointer
     var decklengte = decks[0].length
     deck1
-    
-        //for (var i = 0; i < decks[0].length; i++) {
-        //    deck1.create(640 - decklengte*20 + 20 + i*40, 600, decks[0][i])
-        //    deck1.depth = 1
-        //}
+    backcard.on('pointerdown', function(event) {
+        for (var i = 0; i < decks[0].length; i++) {
+            deck1.create(640 - decklengte*20 + 20 + i*40, 600, decks[0][i])
+        }
+    })
+        
         deck1.children.iterate((child) => {
             child.setScale(0.2, 0.2)
+            //child.depth = 1
             child.setInteractive()
             child.on('pointerover', function(event) {
                 child.y = 550
-                child.depth = 2
+                //child.depth = 2
             })
                 
             child.on('pointerout', function(event) {
                 child.y = 600
-                child.depth = 0
+                //child.depth = 1
             })
         })
 
@@ -211,9 +224,9 @@ update(){
 
 // variabele die nodig zijn
 var aantalSpelers = 4
-let beurt = 1
+var beurt = 1
 var gespeeldeKaart
-let spelrichting = 1
+var spelrichting = 1
 let opgelegd = 'nee'
 var keuzeSoort = ''
 var pakstapel = []
