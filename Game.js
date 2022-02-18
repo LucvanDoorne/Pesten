@@ -2,6 +2,7 @@ var theme = 'wit'
 var cards
 var deck1
 var backcard
+var huidigeDecklengte = 0
 class Game extends Phaser.Scene {
     constructor() {
         super({key:"Game"})
@@ -88,28 +89,46 @@ create (){
             stoel1.scale = 0.17
             var stoel2 = this.add.image(170, 302, 'gray-chair')
             stoel2.scale = 0.17
-            stoel2.rotation = 3.13
+            stoel2.angle = 180
+            var aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
+            aantalKaarten1.depth = 1
+            var aantalKaarten2 = this.add.text(164, 228, decks[1].length, {font: '25px Arial'})
+            aantalKaarten2.depth = 1
         case 3:
             var stoel1 = this.add.image(170, 38, 'gray-chair')
             stoel1.scale = 0.17
-            var stoel2 = this.add.image(60, 250, 'gray-chair')
-            stoel2.scale = 0.17
-            stoel2.rotation = 4.1
-            var stoel3 = this.add.image(277, 250, 'gray-chair')
+            var stoel3 = this.add.image(60, 250, 'gray-chair')
             stoel3.scale = 0.17
-            stoel3.rotation = 2.2
+            stoel3.rotation = 4.19
+            var stoel2 = this.add.image(277, 250, 'gray-chair')
+            stoel2.scale = 0.17
+            stoel2.rotation = 2.09
+            var aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
+            aantalKaarten1.depth = 1
+            var aantalKaarten2 = this.add.text(164, 90, decks[1].length, {font: '25px Arial'})
+            aantalKaarten2.depth = 1
+            var aantalKaarten3 = this.add.text(164, 90, decks[2].length, {font: '25px Arial'})
+            aantalKaarten3.depth = 1
         case 4:
             var stoel1 = this.add.image(170, 38, 'gray-chair')
             stoel1.scale = 0.17
-            var stoel2 = this.add.image(170, 302, 'gray-chair')
-            stoel2.scale = 0.17
-            stoel2.rotation = 3.13
-            var stoel3 = this.add.image(38, 170, 'gray-chair')
+            var stoel3 = this.add.image(170, 302, 'gray-chair')
             stoel3.scale = 0.17
-            stoel3.rotation = 4.7
-            var stoel4 = this.add.image(302, 170, 'gray-chair')
+            stoel3.angle = 180
+            var stoel4 = this.add.image(38, 170, 'gray-chair')
             stoel4.scale = 0.17
-            stoel4.rotation = 1.57
+            stoel4.angle = 270
+            var stoel2 = this.add.image(302, 170, 'gray-chair')
+            stoel2.scale = 0.17
+            stoel2.angle = 90
+            var aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
+            aantalKaarten1.depth = 1
+            var aantalKaarten2 = this.add.text(228, 158, decks[1].length, {font: '25px Arial'})
+            aantalKaarten2.depth = 1
+            var aantalKaarten3 = this.add.text(164, 228, decks[2].length, {font: '25px Arial'})
+            aantalKaarten3.depth = 1
+            var aantalKaarten4 = this.add.text(90, 157, decks[3].length, {font: '25px Arial'})
+            aantalKaarten4.depth = 1
     }
     //tafel
     var tafel = this.add.image(170, 170, 'Table')
@@ -132,8 +151,8 @@ create (){
     //maakt de decks aan
     deck1 = this.add.group()
     var decklengte = decks[0].length 
-    for (var i = 0; i < decks[0].length; i++) {
-        deck1.create(640 - decklengte*20 + 20 + i*40, 600, decks[0][i])        
+    for (huidigeDecklengte; huidigeDecklengte < decks[0].length; huidigeDecklengte++) {
+        deck1.create(640 - decklengte*20 + 20 + huidigeDecklengte*40, 600, decks[0][huidigeDecklengte])        
     }
     
 
@@ -192,11 +211,13 @@ update(){
     var decklengte = decks[0].length
     deck1
     backcard.on('pointerdown', function(event) {
-        for (var i = 0; i < decks[0].length; i++) {
-            deck1.create(640 - decklengte*20 + 20 + i*40, 600, decks[0][i])
-        }
-    })
         
+        for (huidigeDecklengte; huidigeDecklengte < decks[0].length; huidigeDecklengte++) {
+            deck1.children.iterate((child) => {
+                child.x = child.x - 20
+            })
+            deck1.create(640 + huidigeDecklengte*20 , 600, decks[0][huidigeDecklengte])
+        }
         deck1.children.iterate((child) => {
             child.setScale(0.2, 0.2)
             //child.depth = 1
@@ -211,6 +232,9 @@ update(){
                 //child.depth = 1
             })
         })
+    })
+        
+        
 
     //for (var i = 0; i <= decks[0].length - 1; i++) {
         
