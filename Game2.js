@@ -80,7 +80,7 @@ preload() {
 
 create (){
     deck1 = this.add.group()
-    this.addCards()
+    this.updateCards()
     
     cards = this.add.group()
     cards.scale = 0.1
@@ -92,52 +92,60 @@ create (){
 
 
     //stoelen
+    var stoel1
+    var stoel2
+    var stoel3
+    var stoel4
+    var aantalKaarten1
+    var aantalKaarten2
+    var aantalKaarten3
+    var aantalKaarten4
     switch (aantalSpelers) {
         case 2: 
-            var stoel1 = this.add.sprite(170, 38, 'chair')
+            stoel1 = this.add.sprite(170, 38, 'chair')
             stoel1.scale = 0.17
-            var stoel2 = this.add.sprite(170, 302, 'chair')
+            stoel2 = this.add.sprite(170, 302, 'chair')
             stoel2.scale = 0.17
             stoel2.angle = 180
-            var aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
+            aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
             aantalKaarten1.depth = 1
-            var aantalKaarten2 = this.add.text(164, 228, decks[1].length, {font: '25px Arial'})
+            aantalKaarten2 = this.add.text(164, 228, decks[1].length, {font: '25px Arial'})
             aantalKaarten2.depth = 1
         case 3:
-            var stoel1 = this.add.sprite(170, 38, 'chair')
+            stoel1 = this.add.sprite(170, 38, 'chair')
             stoel1.scale = 0.17
-            var stoel3 = this.add.sprite(60, 250, 'chair')
+            stoel3 = this.add.sprite(60, 250, 'chair')
             stoel3.scale = 0.17
             stoel3.rotation = 4.19
-            var stoel2 = this.add.sprite(277, 250, 'chair')
+            stoel2 = this.add.sprite(277, 250, 'chair')
             stoel2.scale = 0.17
             stoel2.rotation = 2.09
-            var aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
+            aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
             aantalKaarten1.depth = 1
-            var aantalKaarten2 = this.add.text(164, 90, decks[1].length, {font: '25px Arial'})
+            aantalKaarten2 = this.add.text(164, 90, decks[1].length, {font: '25px Arial'})
             aantalKaarten2.depth = 1
-            var aantalKaarten3 = this.add.text(164, 90, decks[2].length, {font: '25px Arial'})
+            aantalKaarten3 = this.add.text(164, 90, decks[2].length, {font: '25px Arial'})
             aantalKaarten3.depth = 1
         case 4:
-            var stoel1 = this.add.sprite(170, 38, 'chair')
+            stoel1 = this.add.sprite(170, 38, 'chair')
             stoel1.scale = 0.17
-            var stoel3 = this.add.sprite(170, 302, 'chair')
+            stoel3 = this.add.sprite(170, 302, 'chair')
             stoel3.scale = 0.17
             stoel3.angle = 180
-            var stoel4 = this.add.sprite(38, 170, 'chair')
+            stoel4 = this.add.sprite(38, 170, 'chair')
             stoel4.scale = 0.17
             stoel4.angle = 270
-            var stoel2 = this.add.sprite(302, 170, 'chair')
+            stoel2 = this.add.sprite(302, 170, 'chair')
             stoel2.scale = 0.17
             stoel2.angle = 90
             stoel3.depth = 2
-            var aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
+            aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
             aantalKaarten1.depth = 1
-            var aantalKaarten2 = this.add.text(228, 158, decks[1].length, {font: '25px Arial'})
+            aantalKaarten2 = this.add.text(228, 158, decks[1].length, {font: '25px Arial'})
             aantalKaarten2.depth = 1
-            var aantalKaarten3 = this.add.text(164, 228, decks[2].length, {font: '25px Arial'})
+            aantalKaarten3 = this.add.text(164, 228, decks[2].length, {font: '25px Arial'})
             aantalKaarten3.depth = 1
-            var aantalKaarten4 = this.add.text(90, 157, decks[3].length, {font: '25px Arial'})
+            aantalKaarten4 = this.add.text(90, 157, decks[3].length, {font: '25px Arial'})
             aantalKaarten4.depth = 2
     }
     //tafel
@@ -157,7 +165,7 @@ create (){
         }
         deck1.clear(true)
         console.log(deck1)
-        this.addCards()
+        this.updateCards()
     },this)
 
 
@@ -199,13 +207,26 @@ create (){
     
 }
 
-addCards(){
+removeCard(card){
+    var done = false;
+    deck1.children.iterate((child) => {
+        
+        if(child == card && !done){
+            child.destroy()
+            done = true
+        }
+    })
+    console.log(deck1.getChildren().length)
+
+    //this.updateCards()
+}
+
+updateCards(){
     var pointer = this.input.activePointer
-    
+    deck1.clear()
     //maakt de decks aan
-    console.log(decks[0].length)
     var decklengte = decks[0].length 
-    console.log(deck1.getChildren())
+    //console.log(deck1.getChildren())
     //var deck1Kaart
     for (var i = 0; i < decks[0].length; i++) {
         deck1.create(640 - decklengte*20 + 20 + i*40, 600, decks[0][i])
@@ -228,11 +249,11 @@ addCards(){
         
 
 
-        this.input.on('gameobjectdown', function(pointer, gameObject) {
+        child.on('pointerdown', function(pointer) {
             if (pointer.leftButtonDown()){
-                
+                this.removeCard()
             }
-        })
+        }, this)
     })
 }
 
