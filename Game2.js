@@ -351,7 +351,7 @@ pakstapel = pakstapel[0]
 pakstapel.push(pestkaart)
 
 
-// zorgt ervoor dat de soort en nummer van een bepaalde kaart gescheiden wordt
+/* zorgt ervoor dat de soort en nummer van een bepaalde kaart gescheiden wordt
 const soortGespeeldeKaart = gespeeldeKaart[0].charAt(0)
 const nummerGespeeldeKaart = gespeeldeKaart[0].charAt(1)
 const soortGeselecteerdeKaart = geselecteerdeKaart[0].charAt(0)
@@ -383,7 +383,7 @@ switch (aantalSpelers) {
         }
 }
 
-// checkt of de geselecteerde kaart opgegooid kan worden en gooit deze op als het kan met de benodigde actie van een eventuele speciale kaart
+/* checkt of de geselecteerde kaart opgegooid kan worden en gooit deze op als het kan met de benodigde actie van een eventuele speciale kaart
 function checken() {
     switch (beurt){
         case 1: 
@@ -692,7 +692,7 @@ function winnaar(){
         aantalSpelers = 3
         return 'Gefeliciteerd met de ' + positieWinnaar + 'e plek'
     } 
-}
+}*/
 
 //console.log(deck1.length)
 console.log('geselecteerdeKaart: ' + geselecteerdeKaart)
