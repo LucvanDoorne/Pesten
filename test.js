@@ -50,3 +50,22 @@ pakstapel.push(pestkaart)
 console.log(gespeeldeKaart)
 console.log(decks[0].length)
 console.log(decks[0][0])
+
+
+
+/* oude code
+
+
+
+
+cards(){
+    let deck1Image = []
+    for (var i = 0; i < decks[0].length; i++){
+        let sprite = this.add.sprite(640 - decks[0].length*20 + 20 + i*40, 600, decks[0][i]).setInteractive()
+        sprite.depth = 1
+        sprite.scale = 0.2
+        deck1Image.push(sprite)
+        console.log(sprite)
+    }
+    console.log(deck1Image)
+}*/

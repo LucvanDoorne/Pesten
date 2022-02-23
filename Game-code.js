@@ -79,45 +79,35 @@ function aas() {
 }
 var geselecteerdeKaart = 'K9'
 
-// zorgt ervoor dat de soort en nummer van een bepaalde kaart gescheiden wordt
 const soortGespeeldeKaart = gespeeldeKaart[0].charAt(0)
 const nummerGespeeldeKaart = gespeeldeKaart[0].charAt(1)
 const soortGeselecteerdeKaart = geselecteerdeKaart[0].charAt(0)
 const nummerGeselecteerdeKaart = geselecteerdeKaart[0].charAt(1)
 
-// regelt wie er aan de beurt is
-function beurt1() {
-    if (spelrichting == 'links' && aantalSpelers == 4) {
-        beurt = 4
-    }else if (spelrichting == 'links' && aantalSpelers == 3) {
-        beurt = 3
-    }else {
-        beurt = 2
-    }
-}
-function beurt2(){
-    if (spelrichting == 'rechts' && aantalSpelers >= 3){
-        beurt = 3
-    }else {
-        beurt = 1
-    }
-}
 
-function beurt3(){
-    if (spelrichting == 'rechts' && aantalSpelers == 4) {
-        beurt = 4
-    }else if (spelrichting == 'rechts' && aantalSpelers == 3) {
-        beurt = 1
-    }else {
-        beurt = 2
-    }
-}
-function beurt4(){
-    if (spelrichting == 'rechts') {
-        beurt = 1
-    }else { 
-        beurt = 3
-    }
+// regelt wie er aan de beurt is
+switch (aantalSpelers) {
+    case 2:
+        if (beurt > 2){
+            beurt = 1
+        }
+        if (beurt < 1) {
+            beurt = 2
+        }
+    case 3: 
+        if (beurt > 3) {
+            beurt = 1
+        }
+        if (beurt < 1) {
+            beurt = 3
+        }
+    case 4: 
+        if (beurt > 4){
+            beurt = 1
+        }
+        if (beurt < 1) {
+            beurt = 4
+        }
 }
 
 // checkt of de geselecteerde kaart opgegooid kan worden en gooit deze op als het kan met de benodigde actie van een eventuele speciale kaart
@@ -125,57 +115,48 @@ function checken() {
     switch (beurt){
         case 1: 
             if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'A') {
-                aas()
-                if (aantalSpelers == '4' && spelrichting == 'rechts') {
-                    beurt = 2
-                }else if (aantalSpelers == '4' && spelrichting == 'links') {
-                    beurt = 4
-                }else if (aantalSpelers == '3' && spelrichting == 'rechts') {
-                    beurt = 2
-                }else if (aantalSpelers == '3' && spelrichting == 'links') {
-                    beurt = 3
-                }
+                spelrichting = spelrichting * -1
                 opgelegd = 'ja'
 
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == '2'){
                 opgelegd = 'ja'
-                if (spelrichting == 'links' && aantalSpelers == 4){
-                    deck4.push(pakstapel.splice(0,2))
-                }else if (spelrichting == 'links' && aantalSpelers == 3){
-                    deck3.push(pakstapel.splice(0,2))
+                if (spelrichting == -1 && aantalSpelers == 4){
+                    decks[3].push(pakstapel.splice(0,2))
+                }else if (spelrichting == -1 && aantalSpelers == 3){
+                    decks[2].push(pakstapel.splice(0,2))
                 }else {
-                    deck2.push(pakstapel.splice(0,2))
+                    decks[1].push(pakstapel.splice(0,2))
                 }
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == '8') {
                 opgelegd = 'ja'
                 if (aantalSpelers == '4') {
                     beurt = 3
-                }else if (aantalSpelers == '3' && spelrichting == 'rechts') {
+                }else if (aantalSpelers == '3' && spelrichting == -1) {
                     beurt = 3
-                }else if (aantalSpelers == '3' && spelrichting == 'links') {
+                }else if (aantalSpelers == '3' && spelrichting == -1) {
                     beurt = 2
                 }    
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'B') {
-                const index = deck1.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck1.splice(index, 1))
+                const index = decks[0].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[0].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
                 soortGespeeldeKaart = keuzeSoort
-                beurt1()
+                beurt = beurt + spelrichting
                 winnaar()
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'J') {
-                const index = deck1.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck1.splice(index, 1))
+                const index = decks[0].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[0].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
-                if (spelrichting == 'links' && aantalSpelers == 4){
-                    deck4.push(pakstapel.splice(0,5))
-                }else if (spelrichting == 'links' && aantalSpelers == 3){
-                    deck3.push(pakstapel.splice(0,5))
+                if (spelrichting == -1 && aantalSpelers == 4){
+                    dekcs[3].push(pakstapel.splice(0,5))
+                }else if (spelrichting == -1 && aantalSpelers == 3){
+                    decks[2].push(pakstapel.splice(0,5))
                 }else {
-                    deck2.push(pakstapel.splice(0,5))
+                    decks[1].push(pakstapel.splice(0,5))
                 }
-                beurt1()
+                beurt = beurt + spelrichting
                 soortGespeeldeKaart = keuzeSoort
                 winnaar()
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart) {
@@ -184,12 +165,12 @@ function checken() {
                 return 'Deze kaart kan niet gespeeld worden'
             }
             if (opgelegd == 'ja'){
-                const index = deck1.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck1.splice(index, 1))
+                const index = decks[0].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[0].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
-                if (nummerGeselecteerdeKaart != '7' || nummerGeselecteerdeKaart != '8' || nummerGeselecteerdeKaart != 'A'){ 
-                    beurt1()
+                if (nummerGeselecteerdeKaart != '7' || nummerGeselecteerdeKaart != '8'){ 
+                    beurt = beurt + spelrichting
                 }
                 opgelegd = 'nee'
                 winnaar()
@@ -197,55 +178,46 @@ function checken() {
         case 2:
             if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'A') {
                 opgelegd = 'ja'
-                aas()
-                if (aantalSpelers == '4' && spelrichting == 'rechts') {
-                    beurt = 3
-                }else if (aantalSpelers == '4' && spelrichting == 'links') {
-                    beurt = 1
-                }else if (aantalSpelers == '3' && spelrichting == 'rechts') {
-                    beurt = 3
-                }else if (aantalSpelers == '3' && spelrichting == 'links') {
-                    beurt = 1
-                }
+                spelrichting = spelrichting * -1
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == '2'){
                 opgelegd = 'ja'
-                if (spelrichting == 'rechts' && aantalSpelers == 3){
-                    deck3.push(pakstapel.splice(0,2))
-                }else if (spelrichting == 'rechts' && aantalSpelers == 4){
-                    deck4.push(pakstapel.splice(0,2))
+                if (spelrichting == 1 && aantalSpelers == 3){
+                    decks[2].push(pakstapel.splice(0,2))
+                }else if (spelrichting == 1 && aantalSpelers == 4){
+                    decks[3].push(pakstapel.splice(0,2))
                 }else {
-                    deck1.push(pakstapel.splice(0,2))
+                    decks[0].push(pakstapel.splice(0,2))
                 }
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == '8') {
                 opgelegd = 'ja'
                 if (aantalSpelers == '4') {
                     beurt = 4
-                }else if (aantalSpelers == '3' && spelrichting == 'rechts') {
+                }else if (aantalSpelers == '3' && spelrichting == 1) {
                     beurt = 1
-                }else if (aantalSpelers == '3' && spelrichting == 'links') {
+                }else if (aantalSpelers == '3' && spelrichting == -1) {
                     beurt = 3
                 }    
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'B') {
-                const index = deck2.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck2.splice(index, 1))
+                const index = decks[1].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[1].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
                 soortGespeeldeKaart = keuzeSoort
-                beurt2()
+                beurt = beurt + spelrichting
                 winnaar()
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'J') {
-                const index = deck2.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck2.splice(index, 1))
+                const index = decks[1].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[1].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
-                if (spelrichting == 'rechts' && aantalSpelers == 4){
-                    deck3.push(pakstapel.splice(0,5))
-                }else if (spelrichting == 'rechts' && aantalSpelers == 3){
-                    deck3.push(pakstapel.splice(0,5))
+                if (spelrichting == 1 && aantalSpelers == 4){
+                    decks[2].push(pakstapel.splice(0,5))
+                }else if (spelrichting == 1 && aantalSpelers == 3){
+                    deck[2].push(pakstapel.splice(0,5))
                 }else {
-                    deck1.push(pakstapel.splice(0,5))
+                    deck[0].push(pakstapel.splice(0,5))
                 }
-                beurt2()
+                beurt = beurt + spelrichting
                 soortGespeeldeKaart = keuzeSoort
                 winnaar()
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart) {
@@ -254,12 +226,12 @@ function checken() {
                 return 'Deze kaart kan niet gespeeld worden'
             }
             if (opgelegd == 'ja'){
-                const index = deck2.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck2.splice(index, 1))
+                const index = dekcs[1].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[1].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
-                if (nummerGeselecteerdeKaart != '7' || nummerGeselecteerdeKaart != '8' || nummerGeselecteerdeKaart != 'A'){ 
-                    beurt2()
+                if (nummerGeselecteerdeKaart != '7' || nummerGeselecteerdeKaart != '8'){ 
+                    beurt = beurt + spelrichting
                 }
                 opgelegd = 'nee'
                 winnaar()
@@ -267,53 +239,46 @@ function checken() {
         case 3:
             if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'A') {
                 opgelegd = 'ja'
-                aas()
-                if (aantalSpelers == '4' && spelrichting == 'rechts') {
-                    beurt = 4
-                }else if (aantalSpelers == '3' && spelrichting == 'rechts') {
-                    beurt = 1
-                }else { 
-                    beurt = 2
-                }
+                spelrichting = spelrichting * -1
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == '2'){
                 opgelegd = 'ja'
-                if (spelrichting == 'rechts' && aantalSpelers == 4){
-                    deck4.push(pakstapel.splice(0,2))
-                }else if (spelrichting == 'rechts' && aantalSpelers == 3){
-                    deck1.push(pakstapel.splice(0,2))
+                if (spelrichting == 1 && aantalSpelers == 4){
+                    decks[3].push(pakstapel.splice(0,2))
+                }else if (spelrichting == 1 && aantalSpelers == 3){
+                    decks[0].push(pakstapel.splice(0,2))
                 }else {
-                    deck2.push(pakstapel.splice(0,2))
+                    decks[1].push(pakstapel.splice(0,2))
                 }
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == '8') {
                 opgelegd = 'ja'
                 if (aantalSpelers == '4') {
                     beurt = 1
-                }else if (aantalSpelers == '3' && spelrichting == 'rechts') {
+                }else if (aantalSpelers == '3' && spelrichting == 1) {
                     beurt = 2
-                }else if (aantalSpelers == '3' && spelrichting == 'links') {
+                }else if (aantalSpelers == '3' && spelrichting == -1) {
                     beurt = 1
                 }    
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'B') {
-                const index = deck3.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck3.splice(index, 1))
+                const index = dekcs[2].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[2].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
                 soortGespeeldeKaart = keuzeSoort
-                beurt3()
+                beurt = beurt + spelrichting
                 winnaar()
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'J') {
-                const index = deck3.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck3.splice(index, 1))
+                const index = decks[2].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[2].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
-                if (spelrichting == 'rechts' && aantalSpelers == 4){
-                    deck4.push(pakstapel.splice(0,5))
-                }else if (spelrichting == 'rechts' && aantalSpelers == 3){
-                    deck1.push(pakstapel.splice(0,5))
+                if (spelrichting == 1 && aantalSpelers == 4){
+                    decks[3].push(pakstapel.splice(0,5))
+                }else if (spelrichting == 1 && aantalSpelers == 3){
+                    decks[0].push(pakstapel.splice(0,5))
                 }else {
-                    deck2.push(pakstapel.splice(0,5))
+                    decks[1].push(pakstapel.splice(0,5))
                 }
-                beurt3()
+                beurt = beurt + spelrichting
                 soortGespeeldeKaart = keuzeSoort
                 winnaar()
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart) {
@@ -322,12 +287,12 @@ function checken() {
                 return 'Deze kaart kan niet gespeeld worden'
             }
             if (opgelegd == 'ja'){
-                const index = deck3.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck3.splice(index, 1))
+                const index = decks[2].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[2].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
-                if (nummerGeselecteerdeKaart != '7' || nummerGeselecteerdeKaart != '8' || nummerGeselecteerdeKaart != 'A'){ 
-                    beurt3()
+                if (nummerGeselecteerdeKaart != '7' || nummerGeselecteerdeKaart != '8'){ 
+                    beurt = beurt + spelrichting
                 }
                 winnaar()
                 opgelegd = 'nee'
@@ -335,41 +300,36 @@ function checken() {
         case 4:
             if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'A') {
                 opgelegd = 'ja'
-                aas()
-                if (spelrichting == 'rechts') {
-                    beurt = 1
-                }else { 
-                    beurt = 3
-                }
+                spelrichting = spelrichting * -1
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == '2'){
                 opgelegd = 'ja'
-                if (spelrichting == 'rechts'){
-                    deck1.push(pakstapel.splice(0,2))
+                if (spelrichting == 1){
+                    deck[0].push(pakstapel.splice(0,2))
                 }else {
-                    deck3.push(pakstapel.splice(0,2))
+                    deck[2].push(pakstapel.splice(0,2))
                 }
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == '8') {
                 opgelegd = 'ja'
                 beurt = 2    
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'B') {
-                const index = deck4.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck4.splice(index, 1))
+                const index = decks[3].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[3].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
                 soortGespeeldeKaart = keuzeSoort
-                beurt4()
+                beurt = beurt + spelrichting
                 winnaar()
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart && nummerGeselecteerdeKaart == 'J') {
-                const index = deck4.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck4.splice(index, 1))
+                const index = decks[3].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[3].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
-                if (spelrichting == 'rechts'){
-                    deck1.push(pakstapel.splice(0,5))
+                if (spelrichting == 1){
+                    decks[0].push(pakstapel.splice(0,5))
                 }else {
-                    deck3.push(pakstapel.splice(0,5))
+                    decks[2].push(pakstapel.splice(0,5))
                 }
-                beurt4()
+                beurt = beurt + spelrichting
                 soortGespeeldeKaart = keuzeSoort
                 winnaar()
             }else if (soortGespeeldeKaart == soortGeselecteerdeKaart || nummerGespeeldeKaart == nummerGeselecteerdeKaart) {
@@ -378,12 +338,12 @@ function checken() {
                 return 'Deze kaart kan niet gespeeld worden'
             }
             if (opgelegd == 'ja'){
-                const index = deck4.indexOf(geselecteerdeKaart)
-                pakstapel.push(deck4.splice(index, 1))
+                const index = decks[3].indexOf(geselecteerdeKaart)
+                pakstapel.push(decks[3].splice(index, 1))
                 shuffle(pakstapel)
                 gespeeldeKaart = geselecteerdeKaart
-                if (nummerGeselecteerdeKaart != '7' || nummerGeselecteerdeKaart != '8' || nummerGeselecteerdeKaart != 'A'){ 
-                    beurt4()
+                if (nummerGeselecteerdeKaart != '7' || nummerGeselecteerdeKaart != '8'){ 
+                    beurt = beurt + spelrichting
                 }
                 winnaar()
                 opgelegd = 'nee'
@@ -395,24 +355,21 @@ function checken() {
 function kaartPakken() {
     switch (beurt) {
         case 1: 
-            deck1.push(pakstapel.splice(0, 1)) 
-            beurt1()
+            decks[0].push(pakstapel.splice(0, 1)) 
         case 2:
-            deck2.push(pakstapel.splice(0, 1))
-            beurt2()
+            decks[1].push(pakstapel.splice(0, 1))
         case 3:
-            deck3.push(pakstapel.splice(0, 1))
-            beurt3()
+            decks[2].push(pakstapel.splice(0, 1))
         case 4:
-            deck4.push(pakstapel.splice(0, 1))
-            beurt4()
+            decks[3].push(pakstapel.splice(0, 1))  
     }
+    beurt = beurt + spelrichting
 }
 // controleert of er een winnaar is en wie dit is
 let gameOver = false
 positieWinnaar = 0
 function winnaar(){
-    if (deck1.length == 0) {
+    if (decks[0].length == 0) {
         positieWinnaar =+ 1
         switch (aantalSpelers) {
             case 2: 
@@ -429,7 +386,7 @@ function winnaar(){
                 
         }
 
-    }else if (deck2.length == 0){
+    }else if (decks[1].length == 0){
         positieWinnaar =+ 1
         switch (aantalSpelers) {
             case 2:
@@ -445,7 +402,7 @@ function winnaar(){
                 return 'Gefeliciteerd met de ' + positieWinnaar + 'e plek'
         }
 
-    }else if (deck3.length == 0){
+    }else if (decks[2].length == 0){
         positieWinnaar =+ 1
         switch (aantalSpelers) {
             case 3: 
@@ -457,13 +414,13 @@ function winnaar(){
                 return 'Gefeliciteerd met de ' + positieWinnaar + 'e plek'
         }
 
-    }else if (deck4.length == 0){
+    }else if (decks[3].length == 0){
         positieWinnaar =+ 1
         aantalSpelers = 3
         return 'Gefeliciteerd met de ' + positieWinnaar + 'e plek'
     } 
 }
-console.log(decks[0])
+
 //console.log(deck1.length)
 console.log('geselecteerdeKaart: ' + geselecteerdeKaart)
 console.log('Beurt: ' + beurt)
