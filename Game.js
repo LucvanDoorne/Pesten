@@ -18,6 +18,10 @@ var aantalKaarten2
 var aantalKaarten3
 var aantalKaarten4
 var speelrichtingImage
+var geselecteerdeKaartNummer
+var geselecteerdeKaartSoort
+var gespeeldeKaartNummer
+var gespeeldeKaartSoort
 
 class Game extends Phaser.Scene {
     constructor() {
@@ -270,7 +274,20 @@ buttons(){
         playText = this.add.text(1015, 585, 'PLAY CARD', {font: '30px Arial'})
         playText.depth = 2
      }
+
+     //maakt een knop aan om de soort te kiezen bij boer / joker
+    if (gespeeldeKaart == 'B') {
+        buttonPlay = this.add.sprite(1100, 600, 'button')
+        buttonPlay.scale = 0.3
+        buttonPlay.depth = 1
+        buttonPlay.setInteractive()
+        buttonPlay.on('pointerdown', function(event) {
+            if (pointer.leftButtonDown()){
+            }
+        }
     
+    
+        )}
 }
 
 updateCards(){
@@ -340,6 +357,11 @@ updateCards(){
             }
         }, this)
     }
+
+    geselecteerdeKaartNummer = geselecteerdeKaart.charAt(1)
+    geselecteerdeKaartSoort = geselecteerdeKaart.charAt(0)
+    gespeeldeKaartNummer = gespeeldeKaart.charAt(1)
+    gespeeldeKaartSoort = gespeeldeKaart.charAt(0)
     
     
 }
@@ -387,7 +409,7 @@ var decks = []
 for (var i = 0; i <= aantalSpelers; i++){
     decks[i] = kaarten.splice(0,7)
 }
-decks[0].push('K2', 'H2', 'S2', 'R2')
+decks[0].push('KB', 'HB', 'SB', 'RB')
 
 
 
@@ -409,10 +431,6 @@ pakstapel.push(pestkaart)
 
 
 function checken(){
-    var geselecteerdeKaartNummer = geselecteerdeKaart.charAt(1)
-    var geselecteerdeKaartSoort = geselecteerdeKaart.charAt(0)
-    var gespeeldeKaartNummer = gespeeldeKaart.charAt(1)
-    var gespeeldeKaartSoort = gespeeldeKaart.charAt(0)
     if (gespeeldeKaartNummer == geselecteerdeKaartNummer || gespeeldeKaartSoort == geselecteerdeKaartSoort || geselecteerdeKaart == 'JJ'){
         if (geselecteerdeKaartNummer == 2) {
             beurtFunctie()
