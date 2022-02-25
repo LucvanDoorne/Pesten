@@ -71,11 +71,14 @@ preload() {
     this.load.image('Schop', 'assets/schop2.png')
     this.load.image('Hart', 'assets/hart.png')
     this.load.image('Ruit', 'assets/ruit.png')
-    
+    this.load.spritesheet('fullscreen', 'assets/fullscreen.png', { frameWidth: 64, frameHeight: 64 })
 
 }
 
 create (){
+    // zorgt ervoor dat ergens op geklikt kan worden
+    var pointer = this.input.activePointer
+
     //maakt de achtergrond
     var background = this.add.image(640,360,'background')
     background.scale = 0.34
@@ -93,6 +96,18 @@ create (){
     //maakt de pakstapel afbeelding
     backcard = this.add.image(730, 290, 'backcard')
     backcard.scale = 0.2
+
+    //full screen button
+    var fullscreen = this.add.image(1264, 16, 'fullscreen', 0).setOrigin(1, 0).setInteractive()
+    fullscreen.on('pointerup', function(event) {
+        if (this.scale.isFullscreen) {
+            fullscreen.setFrame(0)
+            this.scale.stopFullscreen()
+        }else {
+            fullscreen.setFrame(1)
+            this.scale.startFullscreen()
+        }
+    }, this)
 }
 
 stoelen(){
@@ -210,7 +225,7 @@ buttons(){
     var pointer = this.input.activePointer
 
     //maakt de 'pass' button aan zodat je kaarten kan pakken als je geen kaart kan spelen
-    if (jouwBeurt == true) {
+    if (jouwBeurt == true && penalty < 1) {
         buttonPass = this.add.sprite(170, 600, 'button')
         buttonPass.scale = 0.3
         buttonPass.depth = 1
@@ -273,7 +288,8 @@ buttons(){
                     playText.destroy(true)
                     this.stoelen()
                     this.buttons()
-                    }
+                    
+                }
                     geselecteerdeKaartImage.destroy(true)
                     this.updateCards()
             }
@@ -377,7 +393,7 @@ buttons(){
     
     // maakt de penalty knop aan
     if (penalty > 0 && jouwBeurt == true) {
-        buttonPenalty = this.add.sprite(1100, 470, 'button')
+        buttonPenalty = this.add.sprite(170, 600, 'button')
         buttonPenalty.scale = 0.3
         buttonPenalty.depth = 1
         buttonPenalty.setInteractive()
@@ -408,11 +424,15 @@ buttons(){
             }
         }, this)
 
+        buttonPenalty.on('pointerout', function(event) {
+            buttonPenalty.setFrame(0)
+        })
+
         
-        takePenaltyText = this.add.text(1017, 456, 'TAKE CARDS', {font: '26px Arial'})
+        takePenaltyText = this.add.text(87, 586, 'TAKE CARDS', {font: '26px Arial'})
         takePenaltyText.depth = 2
 
-        penaltyText = this.add.text(850, 35, 'CARDS TO GRAB: ' + penalty, {font: '40px Arial'})
+        penaltyText = this.add.text(455, 35, 'CARDS TO GRAB: ' + penalty, {font: '40px Arial'})
         penaltyText.depth = 2
 
     }
