@@ -2,8 +2,10 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var aantalSpelers = 0
+var spelerNummer = 0
 
-var players = {}
+var players = {};
 
 app.use(express.static(__dirname + '/public'));
 
@@ -12,37 +14,34 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-    console.log('a user connected' + socket.id);
-
-    // maakt een nieuwe speler aan en voegt het aan het players object toe
+    aantalSpelers++
+    spelerNummer++
+    console.log('Speler ' + spelerNummer + ' is verbonden   aantal spelers verbonden: ' + aantalSpelers);
+    // create a new player and add it to our players object
     players[socket.id] = {
         playerId: socket.id,
-    }
-    
-    var gespeeldeKaart
-  
-    // stuurt het players object naar de nieuwe speler
+        spelerNummer: spelerNummer
+    };
+    // send the players object to the new player
     socket.emit('currentPlayers', players);
-    // stuurt de gespeelde kaart
-    socket.emit('gespeeldeKaartUpdate', gespeeldeKaart)
 
-    // update alle andere spelers van de nieuwe spelers
+    // update all other players of the new player
     socket.broadcast.emit('newPlayer', players[socket.id]);
 
+    // when a player disconnects, remove them from our players object
     socket.on('disconnect', function () {
-        console.log('user disconnected');
-        // verwijdert de speler van het players object
+        aantalSpelers--
+        console.log('Speler ' + players[socket.id]['spelerNummer'] + ' is niet meer verbonden   aantal spelers nog verbonden: ' + aantalSpelers);
+        delete players[socket.id]
+        
+        // remove this player from our players object
         delete players[socket.id];
-        // stuurt de informatie naar alle spelers om deze speler te verwijderen
-        io.emit('disconnect', socket.id);
-        });
+        // emit a message to all players to remove this player
 
-    socket.on('gespeeldeKaartChange', function() {
-        io.emit('gespeeldeKaartUpdate', gespeeldeKaart)  
-        gespeeldeKaartImage = this.add.image(540, 290, gespeeldeKaart['kaart'])
-    })
-  });
+        //io.emit('disconnect', socket.id);
+    });
+});
 
-server.listen(8081, function () {
-  console.log(`Listening on ${server.address().port}`);
+server.listen(8748, function () {
+    console.log(`Listening on ${server.address().port}`);
 });

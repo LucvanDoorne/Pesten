@@ -78,20 +78,19 @@ preload() {
 create (){
     var self = this
     this.socket = io()
-    this.otherPlayers
     this.socket.on('currentPlayers', function (players) {
         Object.keys(players).forEach(function (id) {
             if (players[id].playerId === self.socket.id) {
                 addPlayer(self, players[id])
-            }else {
+            } else {
                 addOtherPlayers(self, players[id])
             }
         })
     })
-
     this.socket.on('newPlayer', function (playerInfo) {
         addOtherPlayers(self, playerInfo)
     })
+
     this.socket.on('disconnect', function (playerId) {
         self.otherPlayers.getChildren().forEach(function (otherPlayer) {
             if (playerId === otherPlayer.playerId) {
@@ -99,10 +98,7 @@ create (){
             }
         })
     })
-    
-    this.socket.on('gespeeldeKaartUpdate', function (gespeeldeKaart) {
-        
-    })
+
 
     // zorgt ervoor dat ergens op geklikt kan worden
     var pointer = this.input.activePointer
@@ -556,27 +552,22 @@ function addPlayer(self, playerInfo) {
     for (var i = 0; i < decks[spelerNummer - 1].length; i++) {
         self.deck1.create(640 - decks[spelerNummer - 1].length*20 + 20 + i*40, 600, decks[spelerNummer - 1][i]['kaart'])
     }
-
 }
 
 function addOtherPlayers(self, playerInfo) {
-    otherPlayer.playerId = playerInfo.playerId;
-    self.otherPlayers.add(otherPlayer);
-  }
-  
+    
+}
+
 
 
 // variabele die nodig zijn
-var aantalSpelers = 4
-var beurt = 1
 var deck1 = ''
 var backcard
-var geselecteerdeKaart = ''
 var kaartIndex = 0
 var buttonPlay = ''
 var playText
 var geselecteerdeKaartImage
-var oplgelegd = false
+var opgelegd = false
 var stoel1 = ''
 var stoel2
 var stoel3
@@ -586,24 +577,33 @@ var aantalKaarten2
 var aantalKaarten3
 var aantalKaarten4
 var speelrichtingImage
-var geselecteerdeKaartNummer
-var geselecteerdeKaartSoort
-var gespeeldeKaartNummer
-var gespeeldeKaartSoort
-var penalty = 0
-var gespeeldeKaart
 var buttonPass = ''
 var passText
 var penaltyText
 var buttonPenalty = ''
 var takePenaltyText
 var jouwBeurt = false
-var spelerNummer = 1
-var spelrichting = 1
-let opgelegd = 'nee'
 var keuzeSoort = ''
+
+if (beurt == spelerNummer) {
+    jouwBeurt = true
+}
+if (beurt != spelerNummer) {
+    jouwBeurt = false
+    
+}
+
+// code voor in de server
+var beurt = 1
+var spelrichting = 1
+var decks = []
 var pakstapel = []
+var gespeeldeKaart
+var aantalSpelers = 4
+var penalty = 0
+var spelerNummer = 1
 var pestkaart = []
+var geselecteerdeKaart = ''
 var kaarten = [
     { kaart: 'aas harten', soort: 'harten', trueNumber: 1, number: 0 },
     { kaart: '2 harten', soort: 'harten', trueNumber: 2, number: 1 },
@@ -674,7 +674,7 @@ function shuffle(array) {
 shuffle(kaarten)
 
 // maakt decks aan
-var decks = []
+
 for (var i = 0; i <= aantalSpelers; i++){
     decks[i] = kaarten.splice(0,7)
 }
@@ -694,6 +694,22 @@ while (kaarten.length > 0) {
     pakstapel.push(pakstapelKaarten)
 }
 
+// regelt dat de beurt goed werkt
+function beurtFunctie(){
+    beurt = beurt + 1 * spelrichting
+    if (beurt > aantalSpelers) {
+        beurt = 1
+    }else if (beurt < 1) {
+        beurt = aantalSpelers
+    }
+    if (beurt == spelerNummer) {
+        jouwBeurt = true
+    }
+    if (beurt != spelerNummer) {
+        jouwBeurt = false
+        
+    }
+}
 function checken(){
     if (gespeeldeKaart['trueNumber'] == geselecteerdeKaart['trueNumber'] || gespeeldeKaart['soort'] == geselecteerdeKaart['soort'] || geselecteerdeKaart['soort'] == 'special' && penalty < 1){
         if (geselecteerdeKaart['trueNumber'] == 0) {
@@ -736,30 +752,5 @@ function checken(){
         opgelegd = false
     }
 
-}
-
-// regelt dat de beurt goed werkt
-function beurtFunctie(){
-    beurt = beurt + 1 * spelrichting
-    if (beurt > aantalSpelers) {
-        beurt = 1
-    }else if (beurt < 1) {
-        beurt = aantalSpelers
-    }
-    if (beurt == spelerNummer) {
-        jouwBeurt = true
-    }
-    if (beurt != spelerNummer) {
-        jouwBeurt = false
-        
-    }
-}
-
-if (beurt == spelerNummer) {
-    jouwBeurt = true
-}
-if (beurt != spelerNummer) {
-    jouwBeurt = false
-    
 }
 
