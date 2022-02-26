@@ -4,7 +4,7 @@ class Game extends Phaser.Scene {
     }
 
 preload() {
-    this.load.image('background', 'public/assets/Background.jpg')
+    this.load.image('background', 'assets/Background.jpg')
     this.load.image('aas harten', 'assets/cards/wit/withartenA.png')
     this.load.image('2 harten', 'assets/cards/wit/witharten2.png')
     this.load.image('3 harten', 'assets/cards/wit/witharten3.png')
@@ -76,6 +76,34 @@ preload() {
 }
 
 create (){
+    var self = this
+    this.socket = io()
+    this.otherPlayers
+    this.socket.on('currentPlayers', function (players) {
+        Object.keys(players).forEach(function (id) {
+            if (players[id].playerId === self.socket.id) {
+                addPlayer(self, players[id])
+            }else {
+                addOtherPlayers(self, players[id])
+            }
+        })
+    })
+
+    this.socket.on('newPlayer', function (playerInfo) {
+        addOtherPlayers(self, playerInfo)
+    })
+    this.socket.on('disconnect', function (playerId) {
+        self.otherPlayers.getChildren().forEach(function (otherPlayer) {
+            if (playerId === otherPlayer.playerId) {
+                otherPlayer.destroy()
+            }
+        })
+    })
+    
+    this.socket.on('gespeeldeKaartUpdate', function (gespeeldeKaart) {
+        
+    })
+
     // zorgt ervoor dat ergens op geklikt kan worden
     var pointer = this.input.activePointer
 
@@ -456,7 +484,6 @@ updateCards(){
     for (var i = 0; i < decks[spelerNummer - 1].length; i++) {
         deck1.create(640 - decks[spelerNummer - 1].length*20 + 20 + i*40, 600, decks[spelerNummer - 1][i]['kaart'])
     }
-
     //zorgt voor de animatie van elke losse kaart 
     deck1.children.iterate((child) => {
         child.setScale(0.2, 0.2)
@@ -524,6 +551,20 @@ update(){
 
 }
 }
+
+function addPlayer(self, playerInfo) {
+    for (var i = 0; i < decks[spelerNummer - 1].length; i++) {
+        self.deck1.create(640 - decks[spelerNummer - 1].length*20 + 20 + i*40, 600, decks[spelerNummer - 1][i]['kaart'])
+    }
+
+}
+
+function addOtherPlayers(self, playerInfo) {
+    otherPlayer.playerId = playerInfo.playerId;
+    self.otherPlayers.add(otherPlayer);
+  }
+  
+
 
 // variabele die nodig zijn
 var aantalSpelers = 4
@@ -638,13 +679,9 @@ for (var i = 0; i <= aantalSpelers; i++){
     decks[i] = kaarten.splice(0,7)
 }
 
-
-
-
 // dit is de beginnende kaart (dit mag geen pestkaart zijn), dit maakt ook de pakstapel aan.
 while (kaarten[0]['trueNumber'] == "1" || kaarten[0]['trueNumber'] == "2" || kaarten[0]['trueNumber'] == "7" || kaarten[0]['trueNumber'] == "8" || kaarten[0]['trueNumber'] == "0" || kaarten[0]['trueNumber'] == "13"){
     pestkaart = kaarten[0].valueOf()
-    console.log(pestkaart)
     kaarten.splice(0,1)
     pakstapel.push(pestkaart)
 }
@@ -656,12 +693,6 @@ while (kaarten.length > 0) {
     kaarten.splice(0, 1)
     pakstapel.push(pakstapelKaarten)
 }
-
-//pakstapel = pakstapel[0]
-console.log(pakstapel)
-
-
-
 
 function checken(){
     if (gespeeldeKaart['trueNumber'] == geselecteerdeKaart['trueNumber'] || gespeeldeKaart['soort'] == geselecteerdeKaart['soort'] || geselecteerdeKaart['soort'] == 'special' && penalty < 1){
