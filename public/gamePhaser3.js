@@ -7,7 +7,7 @@ var config = {
         width: 1280,
         height: 720
     },
-    scene: [ Game, Homescreen ]
+    scene: [ Homescreen, Game ]
 }
 
 var game = new Phaser.Game(config)

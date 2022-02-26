@@ -550,7 +550,7 @@ update(){
 
 function addPlayer(self, playerInfo) {
     for (var i = 0; i < decks[spelerNummer - 1].length; i++) {
-        self.deck1.create(640 - decks[spelerNummer - 1].length*20 + 20 + i*40, 600, decks[spelerNummer - 1][i]['kaart'])
+       // self.deck1.create(640 - decks[spelerNummer - 1].length*20 + 20 + i*40, 600, decks[spelerNummer - 1][i]['kaart'])
     }
 }
 
