@@ -4,7 +4,7 @@ class Game extends Phaser.Scene {
     }
 
 preload() {
-    this.load.image('background', 'assets/Background.jpg')
+    this.load.image('background', 'public/assets/Background.jpg')
     this.load.image('aas harten', 'assets/cards/wit/withartenA.png')
     this.load.image('2 harten', 'assets/cards/wit/witharten2.png')
     this.load.image('3 harten', 'assets/cards/wit/witharten3.png')
