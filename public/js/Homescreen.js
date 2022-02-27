@@ -21,19 +21,23 @@ class Homescreen extends Phaser.Scene {
                 } else {
                     addOtherPlayers(self, players[id])
                 }
+                aantalSpelers++
             })
         })
         this.socket.on('newPlayer', function (playerInfo) {
             addOtherPlayers(self, playerInfo)
+            aantalSpelers++
         })
 
         this.socket.on('disconnect', function (playerId) {
             self.otherPlayers.getChildren().forEach(function (otherPlayer) {
                 if (playerId === otherPlayer.playerId) {
                     otherPlayer.destroy()
+                    aantalSpelers = aantalSpelers - 1
                 }
             })
         })
+
 
         var pointer = this.input.activePointer
         //achtergrond
@@ -41,30 +45,30 @@ class Homescreen extends Phaser.Scene {
         background.scale = 0.34
         //text
         var SpelersText = this.add.text(150, 200, 'Amount of players:', { font:"40px Impact"} )
-        var aantalSpelersText = this.add.text(489, 203, aantalSpelers,  { font:"40px Impact"} )
+        var aantalSpelersText = this.add.text(489, 203, aantalSpelers / 2,  { font:"40px Impact"} )
         //arrowup
         var arrowUp = this.add.sprite(500, 178, 'Arrow')
         arrowUp.scale = 0.07
         arrowUp.rotation = -1.57
         arrowUp.setInteractive()
-        arrowUp.on('pointerdown', function(event) {
+        /*arrowUp.on('pointerdown', function(event) {
             if (pointer.leftButtonDown() && aantalSpelers < 8){
             aantalSpelers++
             aantalSpelersText.text = aantalSpelers
             }
-        })
+        })*/
         
         //arrowdown
         var arrowDown = this.add.sprite(500, 275, 'Arrow')
         arrowDown.scale = 0.07
         arrowDown.rotation = 1.57
         arrowDown.setInteractive()
-        arrowDown.on('pointerdown', function(event) {
+        /*arrowDown.on('pointerdown', function(event) {
             if (pointer.leftButtonDown() && aantalSpelers > 0){
             aantalSpelers--
             aantalSpelersText.text = aantalSpelers
             }
-        })
+        })*/
 
         var buttonStart = this.add.sprite(640, 450, 'button').setInteractive()
         buttonStart.scale = 0.5
@@ -97,3 +101,14 @@ class Homescreen extends Phaser.Scene {
 
 }
 var aantalSpelersText2
+var aantalSpelers = 0
+
+function addPlayer(self, playerInfo) {
+    /*for (var i = 0; i < decks[spelerNummer - 1].length; i++) {
+       // self.deck1.create(640 - decks[spelerNummer - 1].length*20 + 20 + i*40, 600, decks[spelerNummer - 1][i]['kaart'])
+    }*/
+}
+
+function addOtherPlayers(self, playerInfo) {
+    
+}

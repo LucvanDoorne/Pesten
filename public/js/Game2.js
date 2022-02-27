@@ -139,13 +139,17 @@ stoelen(){
     if (stoel1 != '') {
         stoel1.destroy(true)
         stoel2.destroy(true)
-        stoel3.destroy(true)
-        stoel4.destroy(true)
         aantalKaarten1.destroy(true)
         aantalKaarten2.destroy(true)
-        aantalKaarten3.destroy(true)
-        aantalKaarten4.destroy(true)
         speelrichtingImage.destroy(true)
+        if (aantalSpelers > 2) {
+        stoel3.destroy(true)
+        aantalKaarten3.destroy(true)
+            if (aantalSpelers > 3) {
+                stoel4.destroy(true)
+                aantalKaarten4.destroy(true)
+            }
+        }
     }
     //zorgt voor de pijl die de beurtrichting aangeeft
     speelrichtingImage = this.add.image(160, 370, 'Beurt-richting')
@@ -170,6 +174,7 @@ stoelen(){
         stoel2.angle = 180
         aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
         aantalKaarten1.depth = 4
+        console.log(decks)
         aantalKaarten2 = this.add.text(164, 228, decks[1].length, {font: '25px Arial'})
         aantalKaarten2.depth = 4
     }else if (aantalSpelers == 3) {
@@ -184,9 +189,9 @@ stoelen(){
         stoel2.depth = 10
         aantalKaarten1 = this.add.text(164, 90, decks[0].length, {font: '25px Arial'})
         aantalKaarten1.depth = 4
-        aantalKaarten2 = this.add.text(164, 90, decks[1].length, {font: '25px Arial'})
+        aantalKaarten2 = this.add.text(215, 200, decks[1].length, {font: '25px Arial'})
         aantalKaarten2.depth = 4
-        aantalKaarten3 = this.add.text(164, 90, decks[2].length, {font: '25px Arial'})
+        aantalKaarten3 = this.add.text(110, 200, decks[2].length, {font: '25px Arial'})
         aantalKaarten3.depth = 4
     }else if (aantalSpelers == 4) {
         stoel1 = this.add.sprite(170, 38, 'chair')
@@ -548,15 +553,7 @@ update(){
 }
 }
 
-function addPlayer(self, playerInfo) {
-    for (var i = 0; i < decks[spelerNummer - 1].length; i++) {
-       // self.deck1.create(640 - decks[spelerNummer - 1].length*20 + 20 + i*40, 600, decks[spelerNummer - 1][i]['kaart'])
-    }
-}
 
-function addOtherPlayers(self, playerInfo) {
-    
-}
 
 
 
@@ -599,7 +596,7 @@ var spelrichting = 1
 var decks = []
 var pakstapel = []
 var gespeeldeKaart
-var aantalSpelers = 4
+//var aantalSpelers = 3
 var penalty = 0
 var spelerNummer = 1
 var pestkaart = []
@@ -675,7 +672,7 @@ shuffle(kaarten)
 
 // maakt decks aan
 
-for (var i = 0; i <= aantalSpelers; i++){
+for (var i = 0; i < aantalSpelers; i++){
     decks[i] = kaarten.splice(0,7)
 }
 
